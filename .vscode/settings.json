@@ -1,0 +1,10 @@
+{
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "javascript.format.enable": false,
+  "material-icon-theme.activeIconPack": "react_redux",
+  "java.compile.nullAnalysis.mode": "automatic"
+}
