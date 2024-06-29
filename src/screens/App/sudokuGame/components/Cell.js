@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import {CellSize, BorderWidth} from './GlobalStyle';
 import {colors} from '../../../../constants';
-import {MediumTitle} from '../../../../components';
+import {MediumTitle, Wrapper} from '../../../../components';
 
 const Cell = props => {
   const [number, setNumber] = useState(props.number);
@@ -93,7 +93,10 @@ const Cell = props => {
   // const hint = hints.map(x => x + 1).join('');
 
   return (
-    <Animated.View
+    <Wrapper
+      animation={'bounceInDown'}
+      delay={1000}
+      duration={1000}
       style={[
         styles.cell,
         filled && styles.filledCell,
@@ -118,7 +121,7 @@ const Cell = props => {
         onPress={onPress}
         style={styles.handle}
       />
-    </Animated.View>
+    </Wrapper>
   );
 };
 

@@ -1,7 +1,7 @@
 import {FlatList, Pressable, StyleSheet} from 'react-native';
 import {height, width, totalSize} from 'react-native-dimension';
 
-import {Spacer} from '../../../../components';
+import {Spacer, Wrapper} from '../../../../components';
 import Grid from './Grid';
 import {colors} from '../../../../constants';
 
@@ -12,10 +12,15 @@ export const ColorBlock = ({cellData, onPress}) => {
 export const ColorBox = ({item, onPress, selectedId}) => {
   const isSelected = item.color === selectedId;
   const activeStyle = isSelected ? styles.selectedBox : styles.box;
+  const animation = isSelected ? 'bounceIn' : '';
   return (
-    <Pressable
-      onPress={onPress}
-      style={[{backgroundColor: item.color}, activeStyle]}></Pressable>
+    <Wrapper animation={'bounceIn'} duration={3000} delay={1000}>
+      <Wrapper animation={animation} delay={1000} duration={2000}>
+        <Pressable
+          onPress={onPress}
+          style={[{backgroundColor: item.color}, activeStyle]}></Pressable>
+      </Wrapper>
+    </Wrapper>
   );
 };
 
@@ -24,7 +29,7 @@ export const ColorBoxFlatList = ({data, onPress, selectedId}) => {
     <FlatList
       contentContainerStyle={styles.colorBoxWrapper}
       horizontal
-      ItemSeparatorComponent={() => <Spacer horizontal width={width(2)} />}
+      ItemSeparatorComponent={() => <Spacer horizontal width={width(3)} />}
       data={data}
       renderItem={({item, index}) => (
         <ColorBox

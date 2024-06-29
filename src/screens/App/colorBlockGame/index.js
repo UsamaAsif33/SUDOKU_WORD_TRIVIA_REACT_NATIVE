@@ -4,6 +4,7 @@ import {
   ComponentWrapper,
   MainHeader,
   MainWrapper,
+  PrimaryModal,
   Spacer,
 } from '../../../components';
 import {GameHeader} from '../../../commonComponents';
@@ -12,8 +13,14 @@ import {ColorBoxData} from '../../../utilities/dummyData';
 import {useColorBlockGame} from './hooks';
 
 const ColorBlockGame = () => {
-  const {onPressColorBlock, cellData, onPressCell, selectedColor} =
-    useColorBlockGame();
+  const {
+    onPressColorBlock,
+    cellData,
+    onPressCell,
+    selectedColor,
+    onPressHint,
+    modalVisible,
+  } = useColorBlockGame();
   return (
     <MainWrapper>
       <Spacer height={height(6.4)} />
@@ -22,7 +29,14 @@ const ColorBlockGame = () => {
       </ComponentWrapper>
 
       <Spacer height={height(2)} />
-      <GameHeader />
+      <GameHeader
+        onPressHint={onPressHint}
+        isVisible={modalVisible}
+        title={'Hint!'}
+        description={
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius iusto alias illum, neque itaque, tempora explicabo ratione ipsa enim distinctio, vero magni quis asperiores? Esse sapiente consequuntur non pariatur dolorem.'
+        }
+      />
 
       <Spacer height={height(5.9)} />
       <ColorBlock cellData={cellData} onPress={onPressCell} />

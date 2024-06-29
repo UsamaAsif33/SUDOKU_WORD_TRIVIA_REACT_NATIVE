@@ -8,7 +8,8 @@ import {StatusBar} from 'react-native';
 import {colors} from '../../../constants';
 
 const Home = ({navigation}) => {
-  const {onPressSettings, onPressGame} = useHome(navigation);
+  const {onPressSettings, onPressGame, onPressInstructionsIcon} =
+    useHome(navigation);
   return (
     <MainWrapper>
       <StatusBar
@@ -21,7 +22,10 @@ const Home = ({navigation}) => {
       <HeaderTitleWithFlower />
 
       <Spacer height={height(1.9)} />
-      <HomeIcons onPress={onPressSettings} />
+      <HomeIcons
+        onPressSettings={onPressSettings}
+        onPressInstruction={onPressInstructionsIcon}
+      />
 
       <Spacer height={height(2.3)} />
       <GameCardFlatList data={GamesData} onPress={onPressGame} />

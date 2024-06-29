@@ -69,6 +69,8 @@ export const Wrapper = ({
   direction,
   delay,
   onAnimationEnd,
+  easing,
+  transition,
 }) => {
   return (
     <Animatable.View
@@ -78,6 +80,8 @@ export const Wrapper = ({
       animation={animation}
       delay={delay}
       useNativeDriver={true}
+      easing={easing}
+      transition={transition}
       duration={duration}
       style={[{flex: flex}, style]}>
       {children}

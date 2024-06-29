@@ -4,6 +4,7 @@ import {
   ButtonBorderd,
   MediumText,
   MediumTitle,
+  PrimaryModal,
   RowWrapper,
   RowWrapperBasic,
   Spacer,
@@ -109,28 +110,73 @@ const RightArrowUpIcon = () => {
   );
 };
 
-export const GameHeader = () => {
+const HintBtn = ({onPress}) => {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <RowWrapperBasic style={styles.hintBtn}>
+        <MediumText style={styles.hintText}>Hint</MediumText>
+        <Icon
+          name="lightbulb-variant-outline"
+          type="material-community"
+          color={colors.white}
+          size={totalSize(2.4)}
+        />
+      </RowWrapperBasic>
+    </TouchableOpacity>
+  );
+};
+
+const InstructionBtn = ({onPress}) => {
+  return (
+    <Icon
+      name="info"
+      type="feather"
+      size={totalSize(2.4)}
+      color={colors.white}
+      onPress={onPress}
+    />
+  );
+};
+export const GameHeader = ({
+  onPressHint,
+  isVisible,
+  title,
+  description,
+  onPressInstruction,
+  instructionModal,
+}) => {
   return (
     <RowWrapper>
       <MediumTitle>All Star Nines</MediumTitle>
-      <Wrapper>
-        <TouchableOpacity>
-          <RowWrapperBasic style={styles.hintBtn}>
-            <MediumText style={styles.hintText}>Hint</MediumText>
-            <Icon
-              name="lightbulb-variant-outline"
-              type="material-community"
-              color={colors.white}
-              size={totalSize(2.4)}
-            />
-          </RowWrapperBasic>
-        </TouchableOpacity>
-      </Wrapper>
+      <RowWrapperBasic style={styles.btnsWrapper}>
+        <PrimaryModal
+          isVisible={instructionModal}
+          toggleModal={onPressInstruction}
+          title={'Instructions!'}
+          description={
+            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius iusto alias illum, neque itaque, tempora explicabo ratione ipsa enim distinctio, vero magni quis asperiores? Esse sapiente consequuntur non pariatur dolorem.'
+          }
+          Button={<InstructionBtn onPress={onPressInstruction} />}
+        />
+        <PrimaryModal
+          isVisible={isVisible}
+          toggleModal={onPressHint}
+          title={'Hint!'}
+          description={
+            'Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius iusto alias illum, neque itaque, tempora explicabo ratione ipsa enim distinctio, vero magni quis asperiores? Esse sapiente consequuntur non pariatur dolorem.'
+          }
+          Button={<HintBtn onPress={onPressHint} />}
+        />
+      </RowWrapperBasic>
     </RowWrapper>
   );
 };
 
 const styles = StyleSheet.create({
+  btnsWrapper: {
+    justifyContent: 'space-between',
+    width: width(30),
+  },
   btn: {
     shadowColor: '#6F7EC940',
     shadowOffset: {
@@ -150,6 +196,15 @@ const styles = StyleSheet.create({
     right: width(4),
     position: 'absolute',
   },
+  profilePicWrapper: {
+    width: totalSize(5.5),
+    height: totalSize(5.5),
+    borderRadius: totalSize(5.5) / 2,
+    alignItems: 'center',
+    backgroundColor: colors.appBgColor11,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
   hintBtn: {
     width: width(23.2),
     height: height(4.1),
@@ -159,14 +214,5 @@ const styles = StyleSheet.create({
   },
   hintText: {
     paddingHorizontal: width(1),
-  },
-  profilePicWrapper: {
-    width: totalSize(5.5),
-    height: totalSize(5.5),
-    borderRadius: totalSize(5.5) / 2,
-    alignItems: 'center',
-    backgroundColor: colors.appBgColor11,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

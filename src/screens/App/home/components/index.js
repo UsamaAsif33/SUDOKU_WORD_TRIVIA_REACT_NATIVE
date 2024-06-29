@@ -15,7 +15,7 @@ import {
 import {colors} from '../../../../constants';
 import {FlatList, Pressable, StyleSheet, TouchableOpacity} from 'react-native';
 
-export const HomeIcons = ({onPress}) => {
+export const HomeIcons = ({onPressSettings, onPressInstruction}) => {
   return (
     <RowWrapper>
       <Icon
@@ -23,13 +23,14 @@ export const HomeIcons = ({onPress}) => {
         type="feather"
         size={totalSize(2.4)}
         color={colors.white}
+        onPress={onPressInstruction}
       />
       <Icon
         name="settings-outline"
         type="ionicon"
         size={totalSize(2.4)}
         color={colors.white}
-        onPress={onPress}
+        onPress={onPressSettings}
       />
     </RowWrapper>
   );

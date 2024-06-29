@@ -5,6 +5,10 @@ export const useHome = navigation => {
     navigation.navigate(SCREEN.settings);
   };
 
+  const onPressInstructionsIcon = () => {
+    navigation.navigate(SCREEN.instruction);
+  };
+
   const onPressGame = item => {
     navigation.navigate(item.onPress);
   };
@@ -12,5 +16,6 @@ export const useHome = navigation => {
   return {
     onPressSettings,
     onPressGame,
+    onPressInstructionsIcon,
   };
 };

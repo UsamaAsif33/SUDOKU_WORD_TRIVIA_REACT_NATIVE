@@ -1,27 +1,23 @@
-import React, {useState, useEffect} from 'react';
-import {StyleSheet, Animated, Platform, TouchableOpacity} from 'react-native';
+import {StyleSheet, Platform, TouchableOpacity} from 'react-native';
 
 import {CellSize} from './GlobalStyle';
 import {colors} from '../../../../constants';
+import {MediumTitle, Wrapper} from '../../../../components';
 
-const Cell = props => {
-  const [color, setColor] = useState(props.color);
-
-  useEffect(() => {
-    setColor(props.color);
-  }, [props.color]);
-
-  const onPress = e => {
-    props.onPress && props.onPress(props.index, color);
-  };
-
+const Cell = ({color, onPress}) => {
   const filled = color !== null;
   const initalColor = filled ? color : colors.white;
+  const wrongColor = color == 'red' ? 'swing' : 'bounceIn';
 
   return (
-    <Animated.View style={[styles.cell, {backgroundColor: initalColor}]}>
+    <Wrapper
+      animation={filled ? wrongColor : ''}
+      delay={1000}
+      duration={1000}
+      style={[styles.cell, {backgroundColor: initalColor}]}>
+      {color == 'red' && <MediumTitle style={styles.textColor}>X</MediumTitle>}
       <TouchableOpacity onPress={onPress} style={styles.handle} />
-    </Animated.View>
+    </Wrapper>
   );
 };
 
@@ -61,6 +57,9 @@ const styles = StyleSheet.create({
         lineHeight: Math.floor((CellSize * 2) / 4),
       },
     }),
+  },
+  textColor: {
+    color: colors.white,
   },
 });
 

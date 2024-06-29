@@ -1,21 +1,23 @@
-import React, {useRef} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React from 'react';
+import {StyleSheet} from 'react-native';
 
 import {CellSize, BorderWidth} from './GlobalStyle';
 import Cell from './Cell';
 import {colors} from '../../../../constants';
+import {Wrapper} from '../../../../components';
 
 const stack = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-const Grid = props => {
-  const cells = useRef([]);
-
-  const {cellData = []} = props;
-
+const Grid = ({cellData, onPress}) => {
   return (
-    <View style={styles.container}>
+    <Wrapper style={styles.container}>
       {stack.map((item, i) => (
-        <View key={'grid' + i} style={styles.grid}>
+        <Wrapper
+          animation={'bounceInDown'}
+          delay={500}
+          duration={1000}
+          key={'grid' + i}
+          style={styles.grid}>
           {stack.map((item, j) => {
             const x = (i % 3) * 3 + (j % 3);
             const y = Math.floor(i / 3) * 3 + Math.floor(j / 3);
@@ -24,17 +26,16 @@ const Grid = props => {
               cellData[index] !== undefined ? cellData[index] : null;
             return (
               <Cell
-                // ref={ref => (cells.current[index] = ref)}
                 key={'cell' + index}
                 index={index}
                 color={color}
-                onPress={props.onPress}
+                onPress={() => onPress(index, color)}
               />
             );
           })}
-        </View>
+        </Wrapper>
       ))}
-    </View>
+    </Wrapper>
   );
 };
 

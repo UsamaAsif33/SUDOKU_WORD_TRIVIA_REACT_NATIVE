@@ -1,36 +1,68 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native'
-import { height, totalSize, width } from 'react-native-dimension';
+import React, {Children, useState} from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {height, totalSize, width} from 'react-native-dimension';
 import Modal from 'react-native-modal';
-import { Wrapper, } from '..';
 
-export const PrimaryModal = ({ isVisible, toggleModal, swipeDisabled, onPressCancelDelivery, onPressKeepDelivery, onPressClose }) => {
-    return (
-        <Modal
-            animationType="slide"
-            isVisible={isVisible}
-            swipeDirection={swipeDisabled ? null : 'down'}
-            onSwipeComplete={toggleModal}
-            style={styles.modal}
-            onBackdropPress={toggleModal}
-            backdropOpacity={0.3}
-        >
-            <Wrapper>
+import {colors} from '../../constants';
+import {Icon} from 'react-native-elements';
+import {ComponentWrapper, RowWrapperBasic, Wrapper} from '../wrappers';
+import {MediumText, MediumTitle, RegularText} from '../text';
+import {Spacer} from '../spacers';
 
-            </Wrapper>
-        </Modal>
-    );
+export const PrimaryModal = ({
+  isVisible,
+  toggleModal,
+  swipeDisabled,
+  title,
+  description,
+  Button,
+  onPressCancelDelivery,
+  onPressKeepDelivery,
+  onPressClose,
+}) => {
+  return (
+    <Wrapper>
+      {Button}
+      <Modal
+        animationIn={'bounceIn'}
+        animationOut={'bounceOut'}
+        animationType="fade"
+        isVisible={isVisible}
+        swipeDirection={swipeDisabled ? null : 'down'}
+        onSwipeComplete={toggleModal}
+        style={styles.modal}
+        onBackdropPress={toggleModal}
+        backdropOpacity={0.3}>
+        <Wrapper style={styles.showModal}>
+          <ComponentWrapper>
+            <Spacer height={height(2)} />
+            <MediumTitle style={styles.hintModalText}>{title}</MediumTitle>
+            <Spacer height={height(2)} />
+            <RegularText style={styles.hint}>{description}</RegularText>
+          </ComponentWrapper>
+        </Wrapper>
+      </Modal>
+    </Wrapper>
+  );
 };
 
-
-
 const styles = StyleSheet.create({
+  modal: {
+    alignItems: 'center',
+  },
+  showModal: {
+    backgroundColor: colors.white,
+    height: height(30),
+    width: width(70),
+    borderRadius: totalSize(1.2),
+  },
 
-    modal: {
-        marginHorizontal: width(10),
-        borderWidth: 0,
-    },
-
-
-
-})
+  hintModalText: {
+    color: colors.appTextColor3,
+    textAlign: 'center',
+  },
+  hint: {
+    color: colors.black,
+    textAlign: 'justify',
+  },
+});

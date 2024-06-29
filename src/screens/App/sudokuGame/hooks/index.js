@@ -5,6 +5,8 @@ import {Alert} from 'react-native';
 export const useSudokuGame = () => {
   const [selectedValue, setSelectedValue] = useState(null);
   const [cellData, setCellData] = useState(InitalSudokuGameData);
+  const [modelVisible, setModelVisible] = useState(false);
+  const [instructionModelVisible, setInstructionModelVisible] = useState(false);
 
   const handleUserSelectedValue = value => {
     setSelectedValue(value);
@@ -65,10 +67,22 @@ export const useSudokuGame = () => {
     }
   };
 
+  const onPressHint = () => {
+    setModelVisible(!modelVisible);
+  };
+
+  const onPressInstructionIcon = () => {
+    setInstructionModelVisible(!instructionModelVisible);
+  };
+
   return {
     handleUserSelectedValue,
     handleCellPress,
     selectedValue,
     cellData,
+    onPressHint,
+    modelVisible,
+    onPressInstructionIcon,
+    instructionModelVisible,
   };
 };

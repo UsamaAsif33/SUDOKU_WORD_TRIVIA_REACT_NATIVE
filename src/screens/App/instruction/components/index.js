@@ -2,10 +2,11 @@ import {height} from 'react-native-dimension';
 
 import {Button} from '../../../../commonComponents';
 import {RegularText, Spacer, Wrapper} from '../../../../components';
-import {FlatList} from 'react-native';
+import {FlatList, Linking, StyleSheet, Text, ToastAndroid} from 'react-native';
 
 export const InstructionLBtns = ({item, onPress, selectedId}) => {
   const isSelected = item.id === selectedId;
+  const url = 'https://sudokuwordtrivia.com/';
   return (
     <Wrapper>
       <Button
@@ -17,7 +18,13 @@ export const InstructionLBtns = ({item, onPress, selectedId}) => {
       {isSelected ? (
         <Wrapper>
           <Spacer height={height(2)} />
-          <RegularText>{item.description}</RegularText>
+          <RegularText style={styles.description}>
+            {item.description}
+            <Text onPress={() => Linking.openURL(url)} style={styles.link}>
+              sudokuwordtrivia.com
+            </Text>
+            {`\n\nHappy Solving,\nLee Flynn`}
+          </RegularText>
         </Wrapper>
       ) : null}
     </Wrapper>
@@ -28,6 +35,8 @@ export const InstructionLBtnsFlatList = ({data, onPress, selectedId}) => {
   return (
     <FlatList
       data={data}
+      ListFooterComponent={<Spacer height={height(20)} />}
+      showsVerticalScrollIndicator={false}
       ItemSeparatorComponent={() => <Spacer height={height(1.5)} />}
       renderItem={({item, index}) => (
         <InstructionLBtns
@@ -39,3 +48,13 @@ export const InstructionLBtnsFlatList = ({data, onPress, selectedId}) => {
     />
   );
 };
+
+const styles = StyleSheet.create({
+  link: {
+    fontWeight: 'bold',
+    textDecorationLine: 'underline',
+  },
+  description: {
+    textAlign: 'justify',
+  },
+});
