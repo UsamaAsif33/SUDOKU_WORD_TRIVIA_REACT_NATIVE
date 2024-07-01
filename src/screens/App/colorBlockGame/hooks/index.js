@@ -1,9 +1,34 @@
 import {useState} from 'react';
-import {InitialColorBlockGameData} from '../../../../utilities/dummyData';
-import {Alert} from 'react-native';
+import {
+  ColorBlockDataRound1,
+  ColorBlockDataRound2,
+  ColorBlockDataRound3,
+  ColorBlockDataRound4,
+  ColorBlockDataRound5,
+  ColorBlockDataRound6,
+  ColorBlockDataRound7,
+  ColorBlockDataRound8,
+  ColorBlockDataRound9,
+  ColorBlockDataRound10,
+  ColorBlockDataRound11,
+  ColorBlockDataRound12,
+  ColorBlockDataRound13,
+  ColorBlockDataRound14,
+  ColorBlockDataRound15,
+  ColorBlockDataRound16,
+  ColorBlockDataRound17,
+  ColorBlockDataRound18,
+  ColorBlockDataRound19,
+  ColorBlockDataRound20,
+  ColorBlockDataRound21,
+  ColorBlockDataRound22,
+  ColorBlockDataRound23,
+  ColorBlockDataRound24,
+  ColorBlockDataRound25,
+} from '../../../../utilities/dummyData';
 
 export const useColorBlockGame = () => {
-  const [cellData, setCellData] = useState(InitialColorBlockGameData);
+  const [cellData, setCellData] = useState(ColorBlockDataRound25);
   const [selectedColor, setSelectedColor] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [instructionModalVisible, setInstructionModalVisible] = useState(false);
